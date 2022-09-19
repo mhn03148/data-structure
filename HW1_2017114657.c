@@ -13,11 +13,10 @@ int main(){
     {
         vector_array[i] = rand()%(-19)-10;
     }
-    for (int j=0; j<10; j++){
-        printf("%d ",vector_array[j]);
-    }
-    printf("\n");
+    printf("1-1) The vector with 10 random integers is :\n");
+    printarrayFunction(vector_array,10);
     sortFunction(vector_array,0,9);
+    printf("1-2) The vector after passing sort function is :\n");
     printarrayFunction(vector_array,10);
     return 0;
 }
@@ -56,7 +55,9 @@ void sortFunction(int *vector_array, int start, int end){
 }
 
 void printarrayFunction(int arr[],int agrc){
+    printf("v = [ ");
     for(int i=0; i<agrc; i++){
         printf("%d ",arr[i]);
     }
+    printf("]\n");
 }
