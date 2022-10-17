@@ -177,17 +177,15 @@ Element stackTop(stackHead* pHead)
 };
 
 float evalPostfix(char* postfix)//postfix is input data
-{	
-	char* Postfix;
-	Postfix = infix2postfix(postfix);//post postfix value computed
-	int length = strlen(Postfix);
+{	// postfix value computed
+	int length = strlen(postfix);
 	stackHead* pHead = CreateStack();
 	Element token;
 	int index_postfix = 0;
 	int oper;
 	for (int i = 0; i<length; i++)
 	{
-		token = Postfix[i];
+		token = postfix[i];
 		double num1 = 0;
 		double num2 = 0;
 		if (token != '+' && token != '-' && token != '*' && token != '/')// when the token is a number
@@ -213,18 +211,3 @@ float evalPostfix(char* postfix)//postfix is input data
 	DestroyStack(pHead);
 	return value;
 }
- 
-int main()
-{
-	
-	int b;
-	stackHead stack;
-	CreateStack();
-	push(&stack, 0);
-	push(&stack, 1);
-	
-	int value;
-	value = evalPostfix("3/2");
-	printf("%d\n", value);
-	
-};	
