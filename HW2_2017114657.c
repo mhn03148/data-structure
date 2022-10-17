@@ -169,28 +169,62 @@ Element stackTop(stackHead* pHead)
 		printf("stack is empty\n");
 		return 0;
 	}
-	else
+	else // show top item
 	{
 		Element top_item = pHead->top->data;
 		return top_item;
 	}
+};
+
+float evalPostfix(char* postfix)//postfix is input data
+{	
+	char* Postfix;
+	Postfix = infix2postfix(postfix);//post postfix value computed
+	int length = strlen(Postfix);
+	stackHead* pHead = CreateStack();
+	Element token;
+	int index_postfix = 0;
+	int oper;
+	for (int i = 0; i<length; i++)
+	{
+		token = Postfix[i];
+		double num1 = 0;
+		double num2 = 0;
+		if (token != '+' && token != '-' && token != '*' && token != '/')// when the token is a number
+		{
+			oper = char2int(token);//converting a char an integer
+			push(pHead,oper);
+		}
+		else
+		{
+			num2 = pop(pHead);
+			num1 = pop(pHead);
+			switch(token)//Calculated by each operator
+			{
+				case '+': push(pHead,num1+num2); break;
+				case '-': push(pHead,num1-num2); break;
+				case '*': push(pHead,num1*num2); break;
+				case '/': push(pHead,num1/num2); break;
+			}//and push the calculation result
+		}
+
+	}
+	float value = pop(pHead);
+	DestroyStack(pHead);
+	return value;
 }
-/*
-float evalPostfix(char* postfix)
-{
-	// 2) fill this part
-	return 0;
-}
- */
+ 
 int main()
 {
-	int a;
+	
 	int b;
 	stackHead stack;
 	CreateStack();
 	push(&stack, 0);
 	push(&stack, 1);
-	a = pop(&stack);
-	b = pop(&stack);
-	printf("%d %d \n",a, b);
-}	
+	
+	int value;
+	value = evalPostfix("3/2");
+	printf("%d\n", value);
+	
+};	
